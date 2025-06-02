@@ -15,7 +15,7 @@
 
     h1 {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
     }
 
@@ -23,21 +23,23 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .gallery img {
-      width: 100px; /* Adjusted to be smaller */
-      border-radius: 8px;
+      width: 60px; /* Thumbnail size */
+      height: auto;
+      border-radius: 4px;
       cursor: pointer;
       transition: transform 0.2s ease;
+      border: 1px solid #444;
     }
 
     .gallery img:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
+      z-index: 2;
     }
 
-    /* Modal styling from earlier */
     .modal {
       display: none;
       position: fixed;
@@ -56,7 +58,7 @@
       padding: 20px;
       border: 1px solid #444;
       width: 80%;
-      max-width: 500px;
+      max-width: 400px;
       color: #ddd;
       border-radius: 10px;
     }
@@ -77,7 +79,7 @@
 
     @media (max-width: 600px) {
       .gallery img {
-        width: 80px;
+        width: 50px;
       }
     }
   </style>
@@ -85,10 +87,12 @@
 <body>
   <h1>Gimmick Puppet Card Gallery</h1>
   <div class="gallery">
-    <!-- Cards will be listed here -->
+    <!-- Add your card images here -->
+    <!-- Example:
+    <img src="path/to/card1.jpg" alt="Card 1" onclick="openModal('Card Info Here')">
+    -->
   </div>
 
-  <!-- Modal -->
   <div id="cardModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -97,7 +101,6 @@
   </div>
 
   <script>
-    // Placeholder JavaScript for opening/closing modal
     function openModal(content) {
       document.getElementById("modalContent").innerHTML = content;
       document.getElementById("cardModal").style.display = "block";
