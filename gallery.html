@@ -87,7 +87,8 @@
   .modal-body {
     margin-top: 1rem;
     font-size: 0.95rem;
-    line-height: 1.3;
+    line-height: 1.4;
+    word-wrap: break-word;
   }
   .modal-footer {
     clear: both;
@@ -103,11 +104,41 @@
   <h1>Gimmick Puppet Card Gallery</h1>
 
   <div class="gallery">
-    <img src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" alt="Gimmick Puppet Rouge Doll" data-name="Gimmick Puppet Rouge Doll" data-type="Machine / Effect Monster" data-attribute="DARK" data-level="4" data-effect="If this card is sent from the Deck to the GY by a \"Gimmick Puppet\" monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type \"Gimmick Puppet\" Xyz Monster using only those 2 monsters." />
-    
-    <img src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" alt="Gimmick Puppet Cattle Scream" data-name="Gimmick Puppet Cattle Scream" data-type="Machine / Effect Monster" data-attribute="DARK" data-level="4" data-effect="If this card is sent from the Deck to the GY by a \"Gimmick Puppet\" monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 \"Gimmick Puppet\" monster in your GY, except \"Gimmick Puppet Cattle Scream\"; Special Summon that target." />
+    <img 
+      src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" 
+      alt="Gimmick Puppet Rouge Doll" 
+      data-name="Gimmick Puppet Rouge Doll" 
+      data-type="Machine / Effect Monster" 
+      data-attribute="DARK" 
+      data-level="4" 
+      data-atk="1600" 
+      data-def="1000" 
+      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters." 
+    />
 
-    <img src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" alt="Gimmick Puppet Fantasix Machinix" data-name="Gimmick Puppet Fantasix Machinix" data-type="Machine / Xyz / Effect Monster" data-attribute="DARK" data-rank="8" data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 \"Gimmick Puppet\" monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn." />
+    <img 
+      src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" 
+      alt="Gimmick Puppet Cattle Scream" 
+      data-name="Gimmick Puppet Cattle Scream" 
+      data-type="Machine / Effect Monster" 
+      data-attribute="DARK" 
+      data-level="4" 
+      data-atk="1000" 
+      data-def="2000" 
+      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 'Gimmick Puppet' monster in your GY, except 'Gimmick Puppet Cattle Scream'; Special Summon that target." 
+    />
+
+    <img 
+      src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" 
+      alt="Gimmick Puppet Fantasix Machinix" 
+      data-name="Gimmick Puppet Fantasix Machinix" 
+      data-type="Machine / Xyz / Effect Monster" 
+      data-attribute="DARK" 
+      data-rank="8" 
+      data-atk="3000" 
+      data-def="2000" 
+      data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn." 
+    />
   </div>
 
   <!-- Modal -->
@@ -142,7 +173,7 @@
         <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
         ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
         ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
-        <br/>
+        <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
         <strong>Effect:</strong><br/>${img.dataset.effect}
       `;
       modalDetails.innerHTML = details;
