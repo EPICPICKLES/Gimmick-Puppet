@@ -5,7 +5,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gimmick Puppet Card Gallery</title>
-
 <style>
   body {
     background-color: #1a1a1a;
@@ -20,13 +19,13 @@
 
   .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     gap: 10px;
     max-width: 900px;
     margin: 0 auto 3rem auto;
   }
   .gallery img {
-    width: 80px;
+    width: 70px;
     border-radius: 6px;
     box-shadow: 0 0 6px #000;
     cursor: pointer;
@@ -90,6 +89,8 @@
   .modal-content img.zoomed {
     transform: scale(1.5);
     cursor: zoom-out;
+    position: relative;
+    z-index: 105;
   }
   .modal-body {
     margin-top: 1rem;
@@ -104,72 +105,75 @@
     color: #888;
     text-align: center;
   }
+  nav {
+    display: flex; 
+    justify-content: center; 
+    gap: 2rem; 
+    margin-bottom: 2rem;
+  }
+  nav a {
+    font-weight: 600; 
+    font-size: 1rem; 
+    padding: 0.25rem 0.5rem; 
+    color: #7ecbff; 
+    text-decoration: none;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
 </style>
 </head>
 <body>
 
-  <nav style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
-    <a href="index.html" style="font-weight: 600; font-size: 1rem; padding: 0.25rem 0.5rem; color: #7ecbff; text-decoration: none;">← Back to Home</a>
-  </nav>
+<nav>
+  <a href="index.html">← Back to Home</a>
+</nav>
 
-  <h1>Gimmick Puppet Card Gallery</h1>
+<h1>Gimmick Puppet Card Gallery</h1>
 
-  <div class="gallery">
-    <img 
-      src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" 
-      alt="Gimmick Puppet Rouge Doll" 
-      data-name="Gimmick Puppet Rouge Doll" 
-      data-type="Machine / Effect Monster" 
-      data-attribute="DARK" 
-      data-level="4" 
-      data-atk="1600" 
-      data-def="1000" 
-      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters." 
-    />
+<div class="gallery">
+  <img 
+    src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" 
+    alt="Gimmick Puppet Rouge Doll" 
+    data-name="Gimmick Puppet Rouge Doll" 
+    data-type="Machine / Effect Monster" 
+    data-attribute="DARK" 
+    data-level="4" 
+    data-atk="1600" 
+    data-def="1000" 
+    data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters."
+  />
+  <img 
+    src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" 
+    alt="Gimmick Puppet Cattle Scream" 
+    data-name="Gimmick Puppet Cattle Scream" 
+    data-type="Machine / Effect Monster" 
+    data-attribute="DARK" 
+    data-level="4" 
+    data-atk="1000" 
+    data-def="2000" 
+    data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 'Gimmick Puppet' monster in your GY, except 'Gimmick Puppet Cattle Scream'; Special Summon that target."
+  />
+  <img 
+    src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" 
+    alt="Gimmick Puppet Fantasix Machinix" 
+    data-name="Gimmick Puppet Fantasix Machinix" 
+    data-type="Machine / Xyz / Effect Monster" 
+    data-attribute="DARK" 
+    data-rank="8" 
+    data-atk="3000" 
+    data-def="2000" 
+    data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn."
+  />
 
-    <img 
-      src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" 
-      alt="Gimmick Puppet Cattle Scream" 
-      data-name="Gimmick Puppet Cattle Scream" 
-      data-type="Machine / Effect Monster" 
-      data-attribute="DARK" 
-      data-level="4" 
-      data-atk="1000" 
-      data-def="2000" 
-      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 'Gimmick Puppet' monster in your GY, except 'Gimmick Puppet Cattle Scream'; Special Summon that target." 
-    />
-
-    <img 
-      src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" 
-      alt="Gimmick Puppet Fantasix Machinix" 
-      data-name="Gimmick Puppet Fantasix Machinix" 
-      data-type="Machine / Xyz / Effect Monster" 
-      data-attribute="DARK" 
-      data-rank="8" 
-      data-atk="3000" 
-      data-def="2000" 
-      data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn." 
-    />
-
-    <!-- Placeholders for future cards -->
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
-  </div>
-
-  <!-- Modal -->
-  <div id="cardModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modalName"></h2>
-        <button class="close" id="modalClose" aria-label="Close modal">&times;</button>
-      </div>
-      <img id="modalImg" src="" alt="" />
-      <div class="modal-body" id="modalDetails"></div>
-      <div class="modal-footer">Card details sourced from official databases
+  <!-- Placeholder cards for future additions -->
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." />
+  <img src="https://via.placeholder.com/70x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="
