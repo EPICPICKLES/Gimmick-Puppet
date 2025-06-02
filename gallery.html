@@ -291,8 +291,8 @@
     let effectText = img.dataset.effect;
     let splitEffects = effectText.split('||'); // Split effects by '||'
     let formattedEffects = splitEffects
-      .map((effect, index) => `<strong>Effect ${index + 1}:</strong> ${effect.trim()}`)
-      .join('<br/><br/>');
+  .map((effect, index) => `<strong>(${index + 1})</strong> ${effect.trim()}`)
+  .join('<br/><br/>');
 
     let details = `
       <strong>Type:</strong> ${img.dataset.type}<br/>
