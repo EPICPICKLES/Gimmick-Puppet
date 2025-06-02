@@ -97,6 +97,17 @@
     color: #888;
     text-align: center;
   }
+  /* Click-to-Zoom Styles */
+.popup-content img.zoomed {
+  transform: scale(1.5);
+  transition: transform 0.3s ease;
+  cursor: zoom-out;
+}
+
+.popup-content img {
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
 </style>
 </head>
   <nav style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
@@ -203,6 +214,17 @@
     }
   };
 </script>
-
+<script>
+// Wait until the page loads
+window.onload = function() {
+  // Find the pop-up image inside .popup-content
+  const popupImage = document.querySelector('.popup-content img');
+  if (popupImage) {
+    popupImage.addEventListener('click', () => {
+      popupImage.classList.toggle('zoomed');
+    });
+  }
+};
+</script>
 </body>
 </html>
