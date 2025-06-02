@@ -303,26 +303,28 @@ document.querySelectorAll('.gallery img').forEach(img => {
       effectsList = splitEffects;
     }
 
-    // Format effects with (1), (2), etc:
-    let formattedEffects = effectsList
-      .filter(e => e.length > 0)
-      .map((effect, index) => `<strong>(${index + 1})</strong> ${effect}`)
-      .join('<br/><br/>');
+// Format effects with (1), (2), etc:
+let formattedEffects = effectsList
+  .filter(e => e.length > 0)
+  .map((effect, index) => `<strong>(${index + 1})</strong> ${effect}`)
+  .join('<br/><br/>');
 
-    let details = `
-      <strong>Type:</strong> ${img.dataset.type}<br/>
-      <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
-      ${img.dataset.level && img.dataset.level !== '-' ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
-      ${img.dataset.rank && img.dataset.rank !== '-' ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
-      <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
-      ${summoningCondition ? `<strong>Summoning Condition:</strong> ${summoningCondition}<br/><br/>` : ''}
-      ${formattedEffects}
-    `;
+// Determine if the card is a Spell or Trap
+let isSpellOrTrap = img.dataset.type.includes('Spell') || img.dataset.type.includes('Trap');
 
-    modalDetails.innerHTML = details;
-  });
-});
+// Construct the details string
+let details = `
+  <strong>Type:</strong> ${img.dataset.type}<br/>
+  ${!isSpellOrTrap ? `<strong>Attribute:</strong> ${img.dataset.attribute}<br/>` : ''}
+  ${img.dataset.level && img.dataset.level !== '-' && !isSpellOrTrap ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
+  ${img.dataset.rank && img.dataset.rank !== '-' ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
+  ${!isSpellOrTrap ? `<strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>` : ''}
+  ${summoningCondition ? `<strong>Summoning Condition:</strong> ${summoningCondition}<br/><br/>` : ''}
+  ${formattedEffects}
+`;
 
+// Now assign the details string to the modal
+modalDetails.innerHTML = details;
 modalClose.onclick = () => (modal.style.display = 'none');
 
 window.onclick = event => {
