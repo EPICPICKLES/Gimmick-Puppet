@@ -103,14 +103,6 @@
       margin-left: 20px;
       border-radius: 6px;
       box-shadow: 0 0 8px #000;
-      transition: transform 0.3s ease;
-      cursor: zoom-in;
-    }
-    .modal-content img.zoomed {
-      transform: scale(1.5);
-      cursor: zoom-out;
-      position: relative;
-      z-index: 105;
     }
     .modal-body {
       margin-top: 1rem;
@@ -169,74 +161,6 @@
       data-def="2000"
       data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn."
     />
-
-    <!-- Placeholder cards for future additions -->
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
   </div>
 
   <!-- Modal -->
@@ -248,7 +172,7 @@
       </div>
       <img id="modal-img" src="" alt="" />
       <div class="modal-body" id="modal-desc"></div>
-      <div class="modal-footer">Click on the image to zoom in/out.</div>
+      <div class="modal-footer">Click outside or on × to close.</div>
     </div>
   </div>
 
@@ -266,9 +190,7 @@
         modalName.textContent = img.dataset.name || 'Unknown Card';
         modalImg.src = img.src;
         modalImg.alt = img.alt;
-        modalImg.classList.remove('zoomed');
-
-        let details = `
+        modalDesc.innerHTML = `
           <strong>Type:</strong> ${img.dataset.type || '-'}<br/>
           <strong>Attribute:</strong> ${img.dataset.attribute || '-'}<br/>
           ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
@@ -276,7 +198,6 @@
           <strong>ATK:</strong> ${img.dataset.atk || '-'} &nbsp;|&nbsp; <strong>DEF:</strong> ${img.dataset.def || '-'}<br/><br/>
           <strong>Effect:</strong> ${img.dataset.effect || 'No effect description.'}
         `;
-        modalDesc.innerHTML = details;
         modal.style.display = 'block';
       }
     });
@@ -290,10 +211,7 @@
         modal.style.display = 'none';
       }
     });
-
-    modalImg.addEventListener('click', () => {
-      modalImg.classList.toggle('zoomed');
-    });
   </script>
+
 </body>
 </html>
