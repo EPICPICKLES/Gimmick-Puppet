@@ -288,15 +288,20 @@
       modalImg.src = img.src;
       modalImg.alt = img.alt;
 
+      let effectText = img.dataset.effect;
+      let splitEffects = effectText.split('||'); // Split effects by '||'
+      let formattedEffects = splitEffects
+        .map((effect, index) => `<strong>Effect ${index + 1}:</strong> ${effect.trim()}`)
+        .join('<br/><br/>');
+
       let details = `
         <strong>Type:</strong> ${img.dataset.type}<br/>
         <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
         ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
         ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
         <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
-        <strong>Effect:</strong><br/>${img.dataset.effect}
+        ${formattedEffects}
       `;
-      modalDetails.innerHTML = details;
     });
   });
 
