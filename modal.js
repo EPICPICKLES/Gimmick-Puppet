@@ -1,5 +1,30 @@
 // modal.js
 
+const cardData = {
+  "65f321124e67b487ab0883a7_w420": {
+    name: "Gimmick Puppet Little Soldiers",
+    type: "Machine / Effect Monster",
+    attribute: "DARK",
+    level: "4",
+    atk: "0",
+    def: "0",
+    effect: `If this card is Normal or Special Summoned: You can send 1 "Gimmick Puppet" monster with a different Level than this card from your Deck to the GY; this card's Level becomes that monster's. You can only use this effect of "Gimmick Puppet Little Soldiers" once per turn.
+||You can banish this card from your GY, then target up to 2 "Gimmick Puppet" monsters you control; increase their Levels by 4 until the end of this turn.`
+  },
+  "66443371d645925fa6f5c530_w420": {
+    name: "Gimmick Puppet Fiendish Knight",
+    type: "Machine / Effect Monster",
+    attribute: "DARK",
+    level: "4",
+    atk: "1800",
+    def: "500",
+    effect: `If this card is in your hand: You can target 1 "Gimmick Puppet" monster in your GY or 1 monster in your opponent's GY; Special Summon it to its owner's field in Defense Position, but its effects are negated, then Special Summon this card.
+||If this card is sent to the GY, except from the hand: You can add it to your hand.
+||You can only use each effect of "Gimmick Puppet Fiendish Knight" once per turn, also you cannot Special Summon from the Extra Deck the turn you activate either of this card's effects, except "Gimmick Puppet" monsters.`
+  },
+  // Add all other cards here with the same structure, using their unique data keys as the object keys
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('cardModal');
   const modalName = document.getElementById('modalName');
@@ -24,18 +49,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Open modal and populate data on card click
   document.querySelectorAll('.gallery img').forEach(img => {
     img.addEventListener('click', () => {
-      modal.style.display = 'block';
-      modalName.textContent = img.dataset.name || '';
-      modalImg.src = img.src;
-      modalImg.alt = img.alt || '';
+      const key = img.dataset.key;
+      const card = cardData[key];
 
-      const effectText = img.dataset.effect || '';
+      if (!card) {
+        console.error("Card data missing for key:", key);
+        return;
+      }
+
+      modal.style.display = 'block';
+      modalName.textContent = card.name;
+      modalImg.src = img.src;
+      modalImg.alt = card.name;
+
+      const effectText = card.effect || '';
       const splitEffects = effectText.split('||').map(e => e.trim());
 
       let summoningCondition = '';
       let effectsList = [];
 
-      if (img.dataset.category === 'extra') {
+      if (card.type.toLowerCase().includes('extra')) {
         // For Extra Deck cards: try to extract summoning condition before first period
         const firstPart = splitEffects[0] || '';
         const firstPeriodIndex = firstPart.indexOf('.');
@@ -55,29 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const formattedEffects = effectsList
         .filter(e => e.length > 0)
         .map((effect, i) => {
-          // Replace bullet points with line breaks + bullet character
           const replaced = effect.replace(/●/g, '<br/>●');
           return `<strong>(${i + 1})</strong> ${replaced}`;
         })
         .join('<br/><br/>');
 
-      // Determine if card is spell or trap
-      const isSpellOrTrap = img.dataset.type?.toLowerCase().includes('spell') || img.dataset.type?.toLowerCase().includes('trap');
+      const isSpellOrTrap = card.type.toLowerCase().includes('spell') || card.type.toLowerCase().includes('trap');
 
-      // Build the details HTML string
       const detailsHTML = `
-        <strong>Type:</strong> ${img.dataset.type || 'N/A'}<br/>
-        ${!isSpellOrTrap ? `<strong>Attribute:</strong> ${img.dataset.attribute || 'N/A'}<br/>` : ''}
-        ${img.dataset.level && img.dataset.level !== '-' && !isSpellOrTrap ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
-        ${img.dataset.rank && img.dataset.rank !== '-' ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
-        ${!isSpellOrTrap ? `<strong>ATK:</strong> ${img.dataset.atk || 'N/A'} | <strong>DEF:</strong> ${img.dataset.def || 'N/A'}<br/><br/>` : ''}
+        <strong>Type:</strong> ${card.type || 'N/A'}<br/>
+        ${!isSpellOrTrap ? `<strong>Attribute:</strong> ${card.attribute || 'N/A'}<br/>` : ''}
+        ${card.level && card.level !== '-' && !isSpellOrTrap ? `<strong>Level:</strong> ${card.level}<br/>` : ''}
+        ${card.rank && card.rank !== '-' ? `<strong>Rank:</strong> ${card.rank}<br/>` : ''}
+        ${!isSpellOrTrap ? `<strong>ATK:</strong> ${card.atk || 'N/A'} | <strong>DEF:</strong> ${card.def || 'N/A'}<br/><br/>` : ''}
         ${summoningCondition ? `<strong>Summoning Condition:</strong> ${summoningCondition}<br/><br/>` : ''}
         ${formattedEffects}
       `;
 
       modalDetails.innerHTML = detailsHTML;
 
-      // Reset zoom class in case it was toggled before
       modalImg.classList.remove('zoomed');
     });
   });
@@ -93,9 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
-      // Remove active class from all tabs
       tabButtons.forEach(btn => btn.classList.remove('active'));
-      // Set clicked tab active
       button.classList.add('active');
 
       const selectedTab = button.dataset.tab;
