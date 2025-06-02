@@ -325,9 +325,13 @@ document.querySelectorAll('.gallery img').forEach(img => {
 
     // Format effects with (1), (2), etc:
     let formattedEffects = effectsList
-      .filter(e => e.length > 0)
-      .map((effect, index) => `<strong>(${index + 1})</strong> ${effect}`)
-      .join('<br/><br/>');
+  .filter(e => e.length > 0)
+  .map((effect, index) => {
+    // Replace each bullet point with <br/>● to split onto separate lines
+    let formattedEffect = effect.replace(/●/g, '<br/>●');
+    return `<strong>(${index + 1})</strong> ${formattedEffect}`;
+  })
+  .join('<br/><br/>');
 
     // Determine if the card is a Spell or Trap
     let isSpellOrTrap = img.dataset.type.includes('Spell') || img.dataset.type.includes('Trap');
