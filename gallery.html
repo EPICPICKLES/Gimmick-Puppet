@@ -19,28 +19,22 @@
   }
 
   /* Tabs Styles */
-  .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    gap: 1rem;
-  }
+.tabs {
+  padding: 0 1rem;         /* Add horizontal padding */
+  overflow-x: auto;        /* Enable horizontal scrolling on small screens */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none;   /* Hide scrollbar in Firefox */
+}
 
-  .tab-btn {
-    padding: 0.5rem 1.2rem;
-    background-color: #333;
-    color: #ddd;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+.tabs::-webkit-scrollbar {
+  display: none;           /* Hide scrollbar in WebKit browsers */
+}
 
-  .tab-btn:hover {
-    background-color: #4aa3ff;
-    color: white;
-  }
+.tab-btn {
+  flex-shrink: 0;          /* Prevent buttons from shrinking */
+  min-width: 80px;         /* Minimum width so text fits */
+  white-space: nowrap;     /* Prevent text wrapping */
+}
 
   .tab-btn.active {
     background-color: #4aa3ff;
