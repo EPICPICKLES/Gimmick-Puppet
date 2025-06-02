@@ -1,121 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gimmick Puppet Card Gallery</title>
-  <style>
-    body {
-      background-color: #1a1a1a;
-      color: #ddd;
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 2rem 1rem;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gimmick Puppet Card Gallery</title>
 
-    h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
+<style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a1a;
+    color: #ddd;
+    margin: 0;
+    padding: 2rem 1rem;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+  }
+  .gallery img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #000;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    opacity: 0.9;
+  }
+  .gallery img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 16px #4aa3ff;
+  }
 
-    .gallery img {
-      width: 60px; /* Thumbnail size */
-      height: auto;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      border: 1px solid #444;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.1);
-      z-index: 2;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.8);
-    }
-
-    .modal-content {
-      background-color: #2a2a2a;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #444;
-      width: 80%;
-      max-width: 400px;
-      color: #ddd;
-      border-radius: 10px;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: #fff;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      .gallery img {
-        width: 50px;
-      }
-    }
-  </style>
+  /* Modal styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  .modal-content {
+    background: #222;
+    padding: 1.5rem;
+    border-radius: 12px;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #ddd;
+    font-size: 1rem;
+    box-shadow: 0 0 20px #4aa3ff;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 8px; right: 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ccc;
+    cursor: pointer;
+    user-select: none;
+  }
+  .modal-close:hover {
+    color: white;
+  }
+</style>
 </head>
+
 <body>
   <h1>Gimmick Puppet Card Gallery</h1>
+
   <div class="gallery">
-    <!-- Add your card images here -->
-    <!-- Example:
-    <img src="path/to/card1.jpg" alt="Card 1" onclick="openModal('Card Info Here')">
-    -->
+    <img src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" alt="Gimmick Puppet Rouge Doll" 
+         onclick="openModal('**Gimmick Puppet Rouge Doll**<br>Level 4 / DARK / Machine<br>Effect: When this card is sent to the GY by a Gimmick Puppet card\'s effect: You can add this card to your hand.<br><br>This card can be Special Summoned from your hand by revealing a Rank 8 monster in your Extra Deck and Special Summoning 1 \"Gimmick Puppet\" monster from your Deck.')">
+    <img src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" alt="Gimmick Puppet Cattle Scream" 
+         onclick="openModal('**Gimmick Puppet Cattle Scream**<br>Level 8 / DARK / Machine<br>Effect: You can Special Summon this card from your hand by banishing 1 \"Gimmick Puppet\" monster from your GY.<br><br>Once per turn: You can detach 1 material; place 1 String Counter on a \"Gimmick Puppet\" Xyz Monster you control.<br><br>When this card is detached from an Xyz Monster: You can Special Summon this card from your GY to your opponent\'s field in Defense Position.')">
+    <img src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" alt="Gimmick Puppet Fantasix Machinix" 
+         onclick="openModal('**Gimmick Puppet Fantasix Machinix**<br>Rank 8 / DARK / Machine / Xyz<br>Effect: You can detach 1 material from this card; Special Summon 1 \"Gimmick Puppet Cattle Scream\" from your GY to your opponent\'s field in Defense Position.<br><br>When this card is sent to the GY: You can add 1 \"Rank-Up-Magic Argent Chaos Force\" from your Deck to your hand.<br><br>This card is a key Xyz Monster in the deck and is often used in combos.')">
   </div>
 
-  <div id="cardModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div id="modalContent"></div>
+  <!-- Modal -->
+  <div id="modal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content" id="modal-content">
+      <span class="modal-close" onclick="closeModal(event)">&times;</span>
+      <div id="modal-text"></div>
     </div>
   </div>
 
-  <script>
-    function openModal(content) {
-      document.getElementById("modalContent").innerHTML = content;
-      document.getElementById("cardModal").style.display = "block";
+<script>
+  function openModal(content) {
+    document.getElementById('modal-text').innerHTML = content;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  function closeModal(event) {
+    if(event.target.id === 'modal' || event.target.className === 'modal-close') {
+      document.getElementById('modal').style.display = 'none';
     }
+  }
+</script>
 
-    function closeModal() {
-      document.getElementById("cardModal").style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      let modal = document.getElementById("cardModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
-  </script>
 </body>
 </html>
