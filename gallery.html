@@ -295,16 +295,16 @@ let splitEffects = effectText.split('||'); // Split effects by '||'
 let summoningCondition = '';
 let effectsList = [];
 
+let effectsList = [];
 if (img.dataset.category === 'extra') {
-  let firstPart = splitEffects[0];
-  let firstPeriodIndex = firstPart.indexOf('.');
-  if (firstPeriodIndex !== -1) {
-    summoningCondition = firstPart.slice(0, firstPeriodIndex).trim();  // no period now
-    let restEffect = firstPart.slice(firstPeriodIndex + 1).trim();
-    if (restEffect) effectsList.push(restEffect);
-  } else {
-    effectsList.push(firstPart.trim());
+  // ... extract summoning condition
+  // Push rest of effects starting from index 1
+  for (let i = 1; i < splitEffects.length; i++) {
+    effectsList.push(splitEffects[i].trim());
   }
+} else {
+  effectsList = splitEffects.map(e => e.trim());
+}
   for (let i = 1; i < splitEffects.length; i++) {
     effectsList.push(splitEffects[i].trim());
   }
