@@ -290,19 +290,48 @@ You can detach 1 material from this card; add 1 &quot;Rank-Up-Magic&quot; Spell 
     modalImg.alt = img.alt;
 
     let effectText = img.dataset.effect;
-    let splitEffects = effectText.split('||'); // Split effects by '||'
-    let formattedEffects = splitEffects
-  .map((effect, index) => `<strong>(${index + 1})</strong> ${effect.trim()}`)
+let splitEffects = effectText.split('||'); // Split effects by '||'
+
+// Check if it's an Extra Deck monster with summoning conditions (very basic detection):
+let summoningCondition = '';
+let effectsList = [];
+
+if (img.dataset.category === 'extra') {
+  // For Extra Deck, extract summoning condition as text before first period:
+  let firstPart = splitEffects[0];
+  let firstPeriodIndex = firstPart.indexOf('.');
+  if (firstPeriodIndex !== -1) {
+    summoningCondition = firstPart.slice(0, firstPeriodIndex + 1).trim();
+    let restEffect = firstPart.slice(firstPeriodIndex + 1).trim();
+    if (restEffect) effectsList.push(restEffect);
+  } else {
+    effectsList.push(firstPart.trim());
+  }
+  // Add the rest of the effects (after first)
+  for (let i = 1; i < splitEffects.length; i++) {
+    effectsList.push(splitEffects[i].trim());
+  }
+} else {
+  // For non-Extra, just use all effects as is
+  effectsList = splitEffects.map(e => e.trim());
+}
+
+// Format effects with (1), (2), etc:
+let formattedEffects = effectsList
+  .map((effect, index) => `<strong>(${index + 1})</strong> ${effect}`)
   .join('<br/><br/>');
 
-    let details = `
-      <strong>Type:</strong> ${img.dataset.type}<br/>
-      <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
-      ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
-      ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
-      <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
-      ${formattedEffects}
-    `;
+let details = `
+  <strong>Type:</strong> ${img.dataset.type}<br/>
+  <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
+  ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
+  ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
+  <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
+  ${summoningCondition ? `<strong>Summoning Condition:</strong> ${summoningCondition}<br/><br/>` : ''}
+  ${formattedEffects}
+`;
+
+modalDetails.innerHTML = details;
 
     // ✅ ADD THIS LINE BELOW
     modalDetails.innerHTML = details;
