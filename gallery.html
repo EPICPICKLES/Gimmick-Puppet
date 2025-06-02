@@ -282,7 +282,6 @@
   const modalClose = document.getElementById('modalClose');
 
   document.querySelectorAll('.gallery img').forEach(img => {
-  document.querySelectorAll('.gallery img').forEach(img => {
   img.addEventListener('click', () => {
     modal.style.display = 'block';
     modalName.textContent = img.dataset.name;
@@ -304,7 +303,8 @@
       ${formattedEffects}
     `;
 
-    modalDetails.innerHTML = details;  // 🔥 This is the fix!
+    // ✅ ADD THIS LINE BELOW
+    modalDetails.innerHTML = details;
   });
 });
 
