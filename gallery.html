@@ -18,28 +18,33 @@
     margin-bottom: 1.5rem;
   }
 
-  /* Tabs */
+  /* Tabs Styles */
   .tabs {
     display: flex;
     justify-content: center;
+    margin-bottom: 1.5rem;
     gap: 1rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
   }
-  .tab-button {
-    background-color: #333;
-    border: none;
-    color: #7ecbff;
-    font-weight: 600;
+
+  .tab-btn {
     padding: 0.5rem 1.2rem;
+    background-color: #333;
+    color: #ddd;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 6px;
     transition: background-color 0.3s ease;
   }
-  .tab-button:hover,
-  .tab-button.active {
+
+  .tab-btn:hover {
     background-color: #4aa3ff;
-    color: #fff;
+    color: white;
+  }
+
+  .tab-btn.active {
+    background-color: #4aa3ff;
+    color: white;
   }
 
   .gallery {
@@ -63,14 +68,6 @@
     box-shadow: 0 0 12px #4aa3ff;
   }
 
-  /* Hide galleries by default */
-  .gallery-container {
-    display: none;
-  }
-  .gallery-container.active {
-    display: grid;
-  }
-
   /* Modal Styles */
   .modal {
     display: none;
@@ -90,7 +87,6 @@
     max-width: 600px;
     color: #ddd;
     text-align: left;
-    position: relative;
   }
   .modal-header {
     display: flex;
@@ -136,38 +132,8 @@
     color: #888;
     text-align: center;
   }
-
-  /* Responsive tweaks */
-  @media (max-width: 600px) {
-    .modal-content {
-      width: 95%;
-      margin: 10% auto;
-    }
-    .modal-content img {
-      width: 100px;
-      margin-left: 10px;
-    }
-    .gallery {
-      max-width: 100%;
-      padding: 0 10px;
-      grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-      gap: 8px;
-    }
-    .gallery img {
-      width: 60px;
-    }
-    .tabs {
-      gap: 0.5rem;
-    }
-    .tab-button {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.9rem;
-    }
-  }
-
 </style>
 </head>
-
 <body>
 
   <nav style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
@@ -177,18 +143,16 @@
   <h1>Gimmick Puppet Card Gallery</h1>
 
   <!-- Tabs -->
-  <div class="tabs" role="tablist" aria-label="Card Categories">
-    <button class="tab-button active" data-target="monsterGallery" role="tab" aria-selected="true" aria-controls="monsterGallery" id="tab-monster">Monsters</button>
-    <button class="tab-button" data-target="spellGallery" role="tab" aria-selected="false" aria-controls="spellGallery" id="tab-spell">Spells</button>
-    <button class="tab-button" data-target="trapGallery" role="tab" aria-selected="false" aria-controls="trapGallery" id="tab-trap">Traps</button>
-    <button class="tab-button" data-target="extraGallery" role="tab" aria-selected="false" aria-controls="extraGallery" id="tab-extra">Extra Deck</button>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="all">All</button>
+    <button class="tab-btn" data-tab="monster">Monsters</button>
+    <button class="tab-btn" data-tab="spell">Spells</button>
+    <button class="tab-btn" data-tab="trap">Traps</button>
+    <button class="tab-btn" data-tab="extra">Extra Deck</button>
   </div>
 
-  <!-- Galleries -->
-
-  <!-- Monster Gallery -->
-  <div id="monsterGallery" class="gallery-container active gallery" role="tabpanel" aria-labelledby="tab-monster">
-    <!-- Existing monsters -->
+  <!-- Gallery -->
+  <div class="gallery">
     <img 
       src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" 
       alt="Gimmick Puppet Rouge Doll" 
@@ -201,6 +165,7 @@
       data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters." 
       data-category="monster"
     />
+
     <img 
       src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" 
       alt="Gimmick Puppet Cattle Scream" 
@@ -213,6 +178,7 @@
       data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 'Gimmick Puppet' monster in your GY, except 'Gimmick Puppet Cattle Scream'; Special Summon that target." 
       data-category="monster"
     />
+
     <img 
       src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" 
       alt="Gimmick Puppet Fantasix Machinix" 
@@ -223,165 +189,121 @@
       data-atk="3000" 
       data-def="2000" 
       data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn." 
-      data-category="monster"
+      data-category="extra"
     />
-    <!-- New monsters -->
-    <img 
-      src="https://static.wikia.nocookie.net/yugioh/images/3/30/GimmickPuppetScissorLord-SR05-EN-UR-1E.png" 
-      alt="Gimmick Puppet Scissor Lord" 
-      data-name="Gimmick Puppet Scissor Lord" 
-      data-type="Machine / Effect Monster" 
-      data-attribute="DARK" 
-      data-level="4" 
-      data-atk="1800" 
-      data-def="900" 
-      data-effect="If this card is sent to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. If this card is in your hand or GY, you can Special Summon it, then immediately after this effect resolves, Xyz Summon 1 'Gimmick Puppet' Xyz Monster using only this card you control." 
-      data-category="monster"
-    />
-    <img 
-      src="https://static.wikia.nocookie.net/yugioh/images/6/63/GimmickPuppetMagician-SR05-EN-UR-1E.png" 
-      alt="Gimmick Puppet Magician" 
-      data-name="Gimmick Puppet Magician" 
-      data-type="Machine / Effect Monster" 
-      data-attribute="DARK" 
-      data-level="4" 
-      data-atk="1900" 
-      data-def="900" 
-      data-effect="If this card is sent to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters." 
-      data-category="monster"
-    />
-  </div>
 
-  <!-- Spell Gallery -->
-  <div id="spellGallery" class="gallery-container gallery" role="tabpanel" aria-labelledby="tab-spell">
-    <!-- Add spell cards here -->
-    <img
-      src="https://s3.duellinksmeta.com/cards/65f321e74e67b487ab088cf9_w420.webp"
-      alt="Gimmick Puppet Magnet Doll"
-      data-name="Gimmick Puppet Magnet Doll"
-      data-type="Spell Card"
-      data-effect="If you control a 'Gimmick Puppet' monster: Target 1 monster on the field; return that target to the hand."
+    <!-- Example Spell Card -->
+    <img 
+      src="https://via.placeholder.com/80x115.png?text=Spell+Card" 
+      alt="Gimmick Puppet Spell Example" 
+      data-name="Gimmick Puppet Spell Example" 
+      data-type="Spell Card" 
+      data-attribute="-" 
+      data-level="-" 
+      data-atk="-" 
+      data-def="-" 
+      data-effect="This is a placeholder spell card effect description." 
       data-category="spell"
     />
-  </div>
 
-  <!-- Trap Gallery -->
-  <div id="trapGallery" class="gallery-container gallery" role="tabpanel" aria-labelledby="tab-trap">
-    <!-- Add trap cards here -->
-    <img
-      src="https://s3.duellinksmeta.com/cards/65f321fa4e67b487ab088d53_w420.webp"
-      alt="Gimmick Puppet Masterpiece"
-      data-name="Gimmick Puppet Masterpiece"
-      data-type="Trap Card"
-      data-effect="Target 1 'Gimmick Puppet' monster you control; Special Summon 1 'Gimmick Puppet' monster from your Deck with a different name."
+    <!-- Example Trap Card -->
+    <img 
+      src="https://via.placeholder.com/80x115.png?text=Trap+Card" 
+      alt="Gimmick Puppet Trap Example" 
+      data-name="Gimmick Puppet Trap Example" 
+      data-type="Trap Card" 
+      data-attribute="-" 
+      data-level="-" 
+      data-atk="-" 
+      data-def="-" 
+      data-effect="This is a placeholder trap card effect description." 
       data-category="trap"
     />
-  </div>
 
-  <!-- Extra Deck Gallery -->
-  <div id="extraGallery" class="gallery-container gallery" role="tabpanel" aria-labelledby="tab-extra">
-    <img 
-      src="https://static.wikia.nocookie.net/yugioh/images/7/7f/GimmickPuppetGearChamber-IOC-EN-UR-1E.png" 
-      alt="Gimmick Puppet Gear Changer" 
-      data-name="Gimmick Puppet Gear Changer" 
-      data-type="Machine / Xyz / Effect Monster" 
-      data-attribute="DARK" 
-      data-rank="8" 
-      data-atk="2800" 
-      data-def="2400" 
-      data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field. If this card has a 'Gimmick Puppet' monster as material, it gains this effect: Once per turn, when your opponent activates a monster effect, you can negate the activation and destroy that monster." 
-      data-category="extra"
-    />
-    <img 
-      src="https://static.wikia.nocookie.net/yugioh/images/d/db/GimmickPuppetGolemLancer-IOC-EN-UR-1E.png" 
-      alt="Gimmick Puppet Golem Lancer" 
-      data-name="Gimmick Puppet Golem Lancer" 
-      data-type="Machine / Xyz / Effect Monster" 
-      data-attribute="DARK" 
-      data-rank="8" 
-      data-atk="2700" 
-      data-def="2100" 
-      data-effect="2 Level 8 Machine-Type monsters. When this card destroys a monster by battle, it can attack once again in a row." 
-      data-category="extra"
-    />
+    <!-- Blank placeholders for future cards -->
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="monster" />
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="spell" />
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="trap" />
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="extra" />
   </div>
 
   <!-- Modal -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+  <div id="cardModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="modalTitle"></h2>
-        <span class="close" id="modalClose" aria-label="Close modal">&times;</span>
+        <h2 id="modalName"></h2>
+        <span class="close" id="modalClose">&times;</span>
       </div>
-      <img id="modalImage" src="" alt="" />
-      <div class="modal-body" id="modalDesc"></div>
-      <div class="modal-footer" id="modalFooter"></div>
+      <img id="modalImg" src="" alt="" />
+      <div class="modal-body" id="modalDetails"></div>
+      <div class="modal-footer">Card details sourced from official databases.</div>
     </div>
   </div>
 
 <script>
-  // Tabs
-  const tabButtons = document.querySelectorAll(".tab-button");
-  const galleries = document.querySelectorAll(".gallery-container");
+  // Modal pop-up functionality
+  const modal = document.getElementById('cardModal');
+  const modalName = document.getElementById('modalName');
+  const modalImg = document.getElementById('modalImg');
+  const modalDetails = document.getElementById('modalDetails');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalName.textContent = img.dataset.name;
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+
+      let details = `
+        <strong>Type:</strong> ${img.dataset.type}<br/>
+        <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
+        ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
+        ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
+        <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
+        <strong>Effect:</strong><br/>${img.dataset.effect}
+      `;
+      modalDetails.innerHTML = details;
+    });
+  });
+
+  modalClose.onclick = () => modal.style.display = 'none';
+  window.onclick = event => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  };
+
+  // Image zoom inside modal
+  modalImg.addEventListener('click', () => {
+    modalImg.classList.toggle('zoomed');
+  });
+
+  // Tab switching functionality
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('.gallery img');
 
   tabButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      tabButtons.forEach(btn => {
-        btn.classList.remove("active");
-        btn.setAttribute("aria-selected", "false");
+    button.addEventListener('click', () => {
+      // Remove active class from all tabs
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      // Set clicked tab active
+      button.classList.add('active');
+
+      const selectedTab = button.dataset.tab;
+
+      cards.forEach(card => {
+        if (selectedTab === 'all') {
+          card.style.display = 'block';
+        } else {
+          if (card.dataset.category === selectedTab) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        }
       });
-      galleries.forEach(gallery => gallery.classList.remove("active"));
-
-      button.classList.add("active");
-      button.setAttribute("aria-selected", "true");
-      const target = document.getElementById(button.getAttribute("data-target"));
-      target.classList.add("active");
     });
-  });
-
-  // Modal popup
-  const modal = document.getElementById("modal");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalImage = document.getElementById("modalImage");
-  const modalDesc = document.getElementById("modalDesc");
-  const modalFooter = document.getElementById("modalFooter");
-  const modalClose = document.getElementById("modalClose");
-
-  document.querySelectorAll(".gallery img").forEach(img => {
-    img.addEventListener("click", () => {
-      modal.style.display = "block";
-      modalTitle.textContent = img.dataset.name;
-      modalImage.src = img.src;
-      modalImage.alt = img.alt;
-      
-      // Compose description
-      let desc = `<strong>Type:</strong> ${img.dataset.type}<br>`;
-      if (img.dataset.level) desc += `<strong>Level:</strong> ${img.dataset.level}<br>`;
-      if (img.dataset.rank) desc += `<strong>Rank:</strong> ${img.dataset.rank}<br>`;
-      if (img.dataset.attribute) desc += `<strong>Attribute:</strong> ${img.dataset.attribute}<br>`;
-      if (img.dataset.atk) desc += `<strong>ATK:</strong> ${img.dataset.atk}<br>`;
-      if (img.dataset.def) desc += `<strong>DEF:</strong> ${img.dataset.def}<br>`;
-      desc += `<p>${img.dataset.effect}</p>`;
-
-      modalDesc.innerHTML = desc;
-      modalFooter.textContent = "Click the image to zoom in/out. Click × or outside modal to close.";
-      modalImage.classList.remove("zoomed");
-    });
-  });
-
-  // Close modal function
-  function closeModal() {
-    modal.style.display = "none";
-  }
-
-  modalClose.addEventListener("click", closeModal);
-  window.addEventListener("click", e => {
-    if (e.target === modal) closeModal();
-  });
-
-  // Zoom toggle on modal image
-  modalImage.addEventListener("click", () => {
-    modalImage.classList.toggle("zoomed");
   });
 </script>
 
