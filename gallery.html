@@ -2,298 +2,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gimmick Puppet Card Gallery</title>
-  <style>
-    body {
-      background-color: #1a1a1a;
-      color: #ddd;
-      font-family: Arial, sans-serif;
-      margin: 2rem 1rem;
-      text-align: center;
-    }
-    h1 {
-      margin-bottom: 1.5rem;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gimmick Puppet Card Gallery</title>
 
-    nav {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2rem;
-    }
-    nav a {
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-      color: #7ecbff;
-      text-decoration: none;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
+<style>
+  body {
+    background-color: #1a1a1a;
+    color: #ddd;
+    font-family: Arial, sans-serif;
+    margin: 2rem 1rem;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 1.5rem;
+  }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-      gap: 10px;
-      max-width: 900px;
-      margin: 0 auto 3rem auto;
-    }
-    .gallery img {
-      width: 70px;
-      border-radius: 6px;
-      box-shadow: 0 0 6px #000;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.3s ease;
-      opacity: 0.9;
-    }
-    .gallery img:hover {
-      transform: scale(1.1);
-      opacity: 1;
-      box-shadow: 0 0 12px #4aa3ff;
-    }
+  /* Tabs Styles */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
 
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 100;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.85);
-    }
-    .modal-content {
-      background-color: #222;
-      margin: 5% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 600px;
-      color: #ddd;
-      text-align: left;
-      position: relative;
-      box-shadow: 0 0 20px #4aa3ff;
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .modal-header h2 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-    .close {
-      color: #aaa;
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-      background: none;
-      border: none;
-    }
-    .close:hover {
-      color: #fff;
-    }
-    .modal-content img {
-      float: right;
-      width: 120px;
-      margin-left: 20px;
-      border-radius: 6px;
-      box-shadow: 0 0 8px #000;
-      transition: transform 0.3s ease;
-      cursor: zoom-in;
-    }
-    .modal-content img.zoomed {
-      transform: scale(1.5);
-      cursor: zoom-out;
-      position: relative;
-      z-index: 105;
-    }
-    .modal-body {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      line-height: 1.4;
-      word-wrap: break-word;
-    }
-    .modal-footer {
-      clear: both;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: #888;
-      text-align: center;
-    }
-  </style>
+  .tab-btn {
+    padding: 0.5rem 1.2rem;
+    background-color: #333;
+    color: #ddd;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .tab-btn:hover {
+    background-color: #4aa3ff;
+    color: white;
+  }
+
+  .tab-btn.active {
+    background-color: #4aa3ff;
+    color: white;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+  }
+  .gallery img {
+    width: 80px;
+    border-radius: 6px;
+    box-shadow: 0 0 6px #000;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.3s ease;
+    opacity: 0.9;
+  }
+  .gallery img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 12px #4aa3ff;
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+  }
+  .modal-content {
+    background-color: #222;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    color: #ddd;
+    text-align: left;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .close {
+    color: #aaa;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover {
+    color: #fff;
+  }
+  .modal-content img {
+    float: right;
+    width: 120px;
+    margin-left: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 8px #000;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+  }
+  .modal-content img.zoomed {
+    transform: scale(1.5);
+    cursor: zoom-out;
+  }
+  .modal-body {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  .modal-footer {
+    clear: both;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #888;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html">← Back to Home</a>
+  <nav style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+    <a href="index.html" style="font-weight: 600; font-size: 1rem; padding: 0.25rem 0.5rem; color: #7ecbff; text-decoration: none;">← Back to Home</a>
   </nav>
 
   <h1>Gimmick Puppet Card Gallery</h1>
 
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="all">All</button>
+    <button class="tab-btn" data-tab="monster">Monsters</button>
+    <button class="tab-btn" data-tab="spell">Spells</button>
+    <button class="tab-btn" data-tab="trap">Traps</button>
+    <button class="tab-btn" data-tab="extra">Extra Deck</button>
+  </div>
+
+  <!-- Gallery -->
   <div class="gallery">
-    <img
-      src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp"
-      alt="Gimmick Puppet Rouge Doll"
-      data-name="Gimmick Puppet Rouge Doll"
-      data-type="Machine / Effect Monster"
-      data-attribute="DARK"
-      data-level="4"
-      data-atk="1600"
-      data-def="1000"
-      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters."
-    />
-    <img
-      src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp"
-      alt="Gimmick Puppet Cattle Scream"
-      data-name="Gimmick Puppet Cattle Scream"
-      data-type="Machine / Effect Monster"
-      data-attribute="DARK"
-      data-level="4"
-      data-atk="1000"
-      data-def="2000"
-      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 'Gimmick Puppet' monster in your GY, except 'Gimmick Puppet Cattle Scream'; Special Summon that target."
-    />
-    <img
-      src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp"
-      alt="Gimmick Puppet Fantasix Machinix"
-      data-name="Gimmick Puppet Fantasix Machinix"
-      data-type="Machine / Xyz / Effect Monster"
-      data-attribute="DARK"
-      data-rank="8"
-      data-atk="3000"
-      data-def="2000"
-      data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn."
+    <img 
+      src="https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp" 
+      alt="Gimmick Puppet Rouge Doll" 
+      data-name="Gimmick Puppet Rouge Doll" 
+      data-type="Machine / Effect Monster" 
+      data-attribute="DARK" 
+      data-level="4" 
+      data-atk="1600" 
+      data-def="1000" 
+      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. During your Main Phase, you can reveal this card in your hand, then target 1 Rank 8 Xyz Monster you control; Special Summon this card, then immediately after this effect resolves, Xyz Summon 1 Machine-Type 'Gimmick Puppet' Xyz Monster using only those 2 monsters." 
+      data-category="monster"
     />
 
-    <!-- Placeholder cards for future additions -->
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
+    <img 
+      src="https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp" 
+      alt="Gimmick Puppet Cattle Scream" 
+      data-name="Gimmick Puppet Cattle Scream" 
+      data-type="Machine / Effect Monster" 
+      data-attribute="DARK" 
+      data-level="4" 
+      data-atk="1000" 
+      data-def="2000" 
+      data-effect="If this card is sent from the Deck to the GY by a 'Gimmick Puppet' monster’s effect: You can add this card from your GY to your hand. You can detach 1 material from an Xyz Monster you control, then target 1 'Gimmick Puppet' monster in your GY, except 'Gimmick Puppet Cattle Scream'; Special Summon that target." 
+      data-category="monster"
     />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
+
+    <img 
+      src="https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp" 
+      alt="Gimmick Puppet Fantasix Machinix" 
+      data-name="Gimmick Puppet Fantasix Machinix" 
+      data-type="Machine / Xyz / Effect Monster" 
+      data-attribute="DARK" 
+      data-rank="8" 
+      data-atk="3000" 
+      data-def="2000" 
+      data-effect="2 Level 8 Machine-Type monsters. You can detach 1 material from this card; Special Summon 1 'Gimmick Puppet' monster from your GY to your opponent’s field, and if you do, it cannot be destroyed by battle or card effects this turn." 
+      data-category="extra"
     />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
+
+    <!-- Example Spell Card -->
+    <img 
+      src="https://via.placeholder.com/80x115.png?text=Spell+Card" 
+      alt="Gimmick Puppet Spell Example" 
+      data-name="Gimmick Puppet Spell Example" 
+      data-type="Spell Card" 
+      data-attribute="-" 
+      data-level="-" 
+      data-atk="-" 
+      data-def="-" 
+      data-effect="This is a placeholder spell card effect description." 
+      data-category="spell"
     />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
+
+    <!-- Example Trap Card -->
+    <img 
+      src="https://via.placeholder.com/80x115.png?text=Trap+Card" 
+      alt="Gimmick Puppet Trap Example" 
+      data-name="Gimmick Puppet Trap Example" 
+      data-type="Trap Card" 
+      data-attribute="-" 
+      data-level="-" 
+      data-atk="-" 
+      data-def="-" 
+      data-effect="This is a placeholder trap card effect description." 
+      data-category="trap"
     />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
-    <img
-      src="https://via.placeholder.com/70x115.png?text=Card+Back"
-      alt="Placeholder"
-      data-name="TBD"
-      data-type="-"
-      data-attribute="-"
-      data-level="-"
-      data-atk="-"
-      data-def="-"
-      data-effect="Card description goes here."
-    />
+
+    <!-- Blank placeholders for future cards -->
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="monster" />
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="spell" />
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="trap" />
+    <img src="https://via.placeholder.com/80x115.png?text=Card+Back" alt="Placeholder" data-name="TBD" data-type="-" data-attribute="-" data-level="-" data-atk="-" data-def="-" data-effect="Card description goes here." data-category="extra" />
   </div>
 
   <!-- Modal -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-name" tabindex="-1">
+  <div id="cardModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="modal-name"></h2>
-        <button type="button" class="close" id="modal-close" aria-label="Close modal">&times;</button>
+        <h2 id="modalName"></h2>
+        <span class="close" id="modalClose">&times;</span>
       </div>
-      <img id="modal-img" src="" alt="" />
-      <div class="modal-body" id="modal-desc"></div>
-      <div class="modal-footer">Click on the image to zoom in/out.</div>
+      <img id="modalImg" src="" alt="" />
+      <div class="modal-body" id="modalDetails"></div>
+      <div class="modal-footer">Card details sourced from official databases.</div>
     </div>
   </div>
 
-  <script>
-    const gallery = document.querySelector('.gallery');
-    const modal = document.getElementById('modal');
-    const modalName = document.getElementById('modal-name');
-    const modalImg = document.getElementById('modal-img');
-    const modalDesc = document.getElementById('modal-desc');
-    const modalClose = document.getElementById('modal-close');
+<script>
+  // Modal pop-up functionality
+  const modal = document.getElementById('cardModal');
+  const modalName = document.getElementById('modalName');
+  const modalImg = document.getElementById('modalImg');
+  const modalDetails = document.getElementById('modalDetails');
+  const modalClose = document.getElementById('modalClose');
 
-    gallery.addEventListener('click', (e) => {
-      if (e.target.tagName === 'IMG') {
-        const img = e.target;
-        modalName.textContent = img.dataset.name || 'Unknown Card';
-        modalImg.src = img.src;
-        modalImg.alt = img.alt;
-        modalImg.classList.remove('zoomed');
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'block';
+      modalName.textContent = img.dataset.name;
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
 
-        let details = `
-          <strong>Type:</strong> ${img.dataset.type || '-'}<br/>
-          <strong>Attribute:</strong> ${img.dataset.attribute || '-'}<br/>
-          ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
-          ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
-          <strong>ATK:</strong> ${img.dataset.atk || '-'} &nbsp;|&nbsp; <strong>DEF:</strong> ${img.dataset.def || '-'}<br/><br/>
-          <strong>Effect:</strong> ${img.dataset.effect || 'No effect description.'}
-        `;
-        modalDesc.innerHTML = details;
-        modal.style.display = 'block';
-      }
+      let details = `
+        <strong>Type:</strong> ${img.dataset.type}<br/>
+        <strong>Attribute:</strong> ${img.dataset.attribute}<br/>
+        ${img.dataset.level ? `<strong>Level:</strong> ${img.dataset.level}<br/>` : ''}
+        ${img.dataset.rank ? `<strong>Rank:</strong> ${img.dataset.rank}<br/>` : ''}
+        <strong>ATK:</strong> ${img.dataset.atk} | <strong>DEF:</strong> ${img.dataset.def}<br/><br/>
+        <strong>Effect:</strong><br/>${img.dataset.effect}
+      `;
+      modalDetails.innerHTML = details;
     });
+  });
 
-    modalClose.addEventListener('click', () => {
+  modalClose.onclick = () => modal.style.display = 'none';
+  window.onclick = event => {
+    if (event.target == modal) {
       modal.style.display = 'none';
-    });
+    }
+  };
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
+  // Image zoom inside modal
+  modalImg.addEventListener('click', () => {
+    modalImg.classList.toggle('zoomed');
+  });
 
-    modalImg.addEventListener('click', () => {
-      modalImg.classList.toggle('zoomed');
+  // Tab switching functionality
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('.gallery img');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all tabs
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      // Set clicked tab active
+      button.classList.add('active');
+
+      const selectedTab = button.dataset.tab;
+
+      cards.forEach(card => {
+        if (selectedTab === 'all') {
+          card.style.display = 'block';
+        } else {
+          if (card.dataset.category === selectedTab) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
