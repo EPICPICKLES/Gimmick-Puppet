@@ -297,19 +297,15 @@ let effectsList = [];
 
 let effectsList = [];
 if (img.dataset.category === 'extra') {
-  // ... extract summoning condition
-  // Push rest of effects starting from index 1
-  for (let i = 1; i < splitEffects.length; i++) {
-    effectsList.push(splitEffects[i].trim());
+  let firstPart = splitEffects[0];
+  let firstPeriodIndex = firstPart.indexOf('.');
+  if (firstPeriodIndex !== -1) {
+    summoningCondition = firstPart.slice(0, firstPeriodIndex).trim();
+    let restEffect = firstPart.slice(firstPeriodIndex + 1).trim();
+    if (restEffect) effectsList.push(restEffect);
+  } else {
+    effectsList.push(firstPart.trim());
   }
-} else {
-  effectsList = splitEffects.map(e => e.trim());
-}
-  for (let i = 1; i < splitEffects.length; i++) {
-    effectsList.push(splitEffects[i].trim());
-  }
-}
-  // Add the rest of the effects (after first)
   for (let i = 1; i < splitEffects.length; i++) {
     effectsList.push(splitEffects[i].trim());
   }
