@@ -221,8 +221,7 @@
       data-rank="8" 
       data-atk="1500" 
       data-def="3100" 
-      data-effect="2 Level 8 monsters
-You can detach 1 material from this card; add 1 &quot;Rank-Up-Magic&quot; Spell from your Deck to your hand, also, you can Normal Summon 1 Machine monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.) ||If you Special Summon a &quot;Gimmick Puppet&quot; Xyz Monster(s) (except during the Damage Step): You can Special Summon this card from your GY to either field in Defense Position, then you can add 1 &quot;Rank-Up-Magic&quot; Spell from your GY to your hand. ||You can only use each effect of &quot;Gimmick Puppet Fantasix Machinix&quot; once per turn." 
+      data-effect="2 Level 8 monsters. You can detach 1 material from this card; add 1 &quot;Rank-Up-Magic&quot; Spell from your Deck to your hand, also, you can Normal Summon 1 Machine monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.) ||If you Special Summon a &quot;Gimmick Puppet&quot; Xyz Monster(s) (except during the Damage Step): You can Special Summon this card from your GY to either field in Defense Position, then you can add 1 &quot;Rank-Up-Magic&quot; Spell from your GY to your hand. ||You can only use each effect of &quot;Gimmick Puppet Fantasix Machinix&quot; once per turn." 
       data-category="extra"
     />
 
@@ -297,16 +296,19 @@ let summoningCondition = '';
 let effectsList = [];
 
 if (img.dataset.category === 'extra') {
-  // For Extra Deck, extract summoning condition as text before first period:
   let firstPart = splitEffects[0];
   let firstPeriodIndex = firstPart.indexOf('.');
   if (firstPeriodIndex !== -1) {
-    summoningCondition = firstPart.slice(0, firstPeriodIndex + 1).trim();
+    summoningCondition = firstPart.slice(0, firstPeriodIndex).trim();  // no period now
     let restEffect = firstPart.slice(firstPeriodIndex + 1).trim();
     if (restEffect) effectsList.push(restEffect);
   } else {
     effectsList.push(firstPart.trim());
   }
+  for (let i = 1; i < splitEffects.length; i++) {
+    effectsList.push(splitEffects[i].trim());
+  }
+}
   // Add the rest of the effects (after first)
   for (let i = 1; i < splitEffects.length; i++) {
     effectsList.push(splitEffects[i].trim());
