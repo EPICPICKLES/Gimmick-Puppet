@@ -121,72 +121,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Open modal and populate data on card click
-  document.querySelectorAll('.images img').forEach(img => {
-    img.addEventListener('click', () => {
-      const key = img.dataset.key;
-      const card = cardData[key];
+// Open modal and populate data on card click
+document.querySelectorAll('.images img').forEach(img => {
+  img.addEventListener('click', () => {
+    const key = parseInt(img.dataset.key, 10);
+    if (isNaN(key) || key < 0 || key >= cardData.length) {
+      console.error("Invalid card data key:", key);
+      return;
+    }
 
-      if (!card) {
-        console.error("Card data missing for key:", key);
-        return;
-      }
+    const card = cardData[key];
 
-      modal.style.display = 'block';
-      modalName.textContent = card.name;
-      modalImg.src = img.src;
-      modalImg.alt = card.name;
+    modal.style.display = 'block';
+    modalName.textContent = card.name;
+    modalImg.src = img.src;
+    modalImg.alt = card.name;
 
-      const effectText = card.effect || '';
-      const splitEffects = effectText.split('||').map(e => e.trim());
+    const effectText = card.effect || '';
+    const splitEffects = effectText.split('||').map(e => e.trim());
 
-      let summoningCondition = '';
-      let effectsList = [];
+    let summoningCondition = '';
+    let effectsList = [];
 
-      if (card.type.toLowerCase().includes('xyz') || card.type.toLowerCase().includes('fusion') || card.type.toLowerCase().includes('synchro') || card.type.toLowerCase().includes('link')) {
-        // For Extra Deck cards, extract summoning condition from first effect
-        const firstPart = splitEffects[0] || '';
-        const firstPeriodIndex = firstPart.indexOf('.');
-        if (firstPeriodIndex !== -1) {
-          summoningCondition = firstPart.slice(0, firstPeriodIndex).trim();
-          const restEffect = firstPart.slice(firstPeriodIndex + 1).trim();
-          if (restEffect) effectsList.push(restEffect);
-        } else {
-          effectsList.push(firstPart);
-        }
-        effectsList = effectsList.concat(splitEffects.slice(1));
+    if (card.type.toLowerCase().includes('xyz') || card.type.toLowerCase().includes('fusion') || card.type.toLowerCase().includes('synchro') || card.type.toLowerCase().includes('link')) {
+      const firstPart = splitEffects[0] || '';
+      const firstPeriodIndex = firstPart.indexOf('.');
+      if (firstPeriodIndex !== -1) {
+        summoningCondition = firstPart.slice(0, firstPeriodIndex).trim();
+        const restEffect = firstPart.slice(firstPeriodIndex + 1).trim();
+        if (restEffect) effectsList.push(restEffect);
       } else {
-        effectsList = splitEffects;
+        effectsList.push(firstPart);
       }
+      effectsList = effectsList.concat(splitEffects.slice(1));
+    } else {
+      effectsList = splitEffects;
+    }
 
-      // Format effects
-      const formattedEffects = effectsList
-        .filter(e => e.length > 0)
-        .map((effect, i) => {
-          const replaced = effect.replace(/●/g, '<br/>●');
-          return `<strong>(${i + 1})</strong> ${replaced}`;
-        })
-        .join('<br/><br/>');
+    const formattedEffects = effectsList
+      .filter(e => e.length > 0)
+      .map((effect, i) => {
+        const replaced = effect.replace(/●/g, '<br/>●');
+        return `<strong>(${i + 1})</strong> ${replaced}`;
+      })
+      .join('<br/><br/>');
 
-      const isSpellOrTrap = card.type.toLowerCase().includes('spell') || card.type.toLowerCase().includes('trap');
+    const isSpellOrTrap = card.type.toLowerCase().includes('spell') || card.type.toLowerCase().includes('trap');
 
-      const detailsHTML = `
-        <strong>Type:</strong> ${card.type || 'N/A'}<br/>
-        ${!isSpellOrTrap ? `<strong>Attribute:</strong> ${card.attribute || 'N/A'}<br/>` : ''}
-        ${card.level && card.level !== '-' && !isSpellOrTrap ? `<strong>Level:</strong> ${card.level}<br/>` : ''}
-        ${card.rank && card.rank !== '-' ? `<strong>Rank:</strong> ${card.rank}<br/>` : ''}
-        ${!isSpellOrTrap ? `<strong>ATK:</strong> ${card.atk || 'N/A'} | <strong>DEF:</strong> ${card.def || 'N/A'}<br/><br/>` : ''}
-        ${summoningCondition ? `<strong>Summoning Condition:</strong> ${summoningCondition}<br/><br/>` : ''}
-        ${formattedEffects}
-      `;
+    const detailsHTML = `
+      <strong>Type:</strong> ${card.type || 'N/A'}<br/>
+      ${!isSpellOrTrap ? `<strong>Attribute:</strong> ${card.attribute || 'N/A'}<br/>` : ''}
+      ${card.level && card.level !== '-' && !isSpellOrTrap ? `<strong>Level:</strong> ${card.level}<br/>` : ''}
+      ${card.rank && card.rank !== '-' ? `<strong>Rank:</strong> ${card.rank}<br/>` : ''}
+      ${!isSpellOrTrap ? `<strong>ATK:</strong> ${card.atk || 'N/A'} | <strong>DEF:</strong> ${card.def || 'N/A'}<br/><br/>` : ''}
+      ${summoningCondition ? `<strong>Summoning Condition:</strong> ${summoningCondition}<br/><br/>` : ''}
+      ${formattedEffects}
+    `;
 
-      modalDetails.innerHTML = detailsHTML;
-      modalImg.classList.remove('zoomed');
-    });
-  });
-
-  // Image zoom toggle on modal image click
-  modalImg.addEventListener('click', () => {
-    modalImg.classList.toggle('zoomed');
+    modalDetails.innerHTML = detailsHTML;
+    modalImg.classList.remove('zoomed');
   });
 });
