@@ -98,7 +98,7 @@ const cardData = [
     alt: "Service Puppet Play"
   }
   // Add more cards here!
-];
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('cardModal');
