@@ -124,18 +124,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // Open modal and populate data on card click
 document.querySelectorAll('.images img').forEach(img => {
   img.addEventListener('click', () => {
-    const key = parseInt(img.dataset.key, 10);
-    if (isNaN(key) || key < 0 || key >= cardData.length) {
-      console.error("Invalid card data key:", key);
+    const cardName = img.dataset.name;
+    const card = cardData.find(c => c.name === cardName);
+
+    if (!card) {
+      console.error("Card data missing for name:", cardName);
       return;
     }
-
-    const card = cardData[key];
 
     modal.style.display = 'block';
     modalName.textContent = card.name;
     modalImg.src = img.src;
     modalImg.alt = card.name;
+
+    // (keep the rest of your code unchanged)
+  });
+});
 
     const effectText = card.effect || '';
     const splitEffects = effectText.split('||').map(e => e.trim());
