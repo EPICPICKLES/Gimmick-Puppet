@@ -1,35 +1,104 @@
 // modal.js
 
-const cardData = {
-  "65f321124e67b487ab0883a7_w420": {
+const cardData = [
+  {
     name: "Gimmick Puppet Little Soldiers",
+    category: "monster",
     type: "Machine / Effect Monster",
     attribute: "DARK",
-    level: "4",
-    atk: "0",
-    def: "0",
-    effect: `If this card is Normal or Special Summoned: You can send 1 "Gimmick Puppet" monster with a different Level than this card from your Deck to the GY; this card's Level becomes that monster's. You can only use this effect of "Gimmick Puppet Little Soldiers" once per turn.
-||You can banish this card from your GY, then target up to 2 "Gimmick Puppet" monsters you control; increase their Levels by 4 until the end of this turn.`
+    level: 4,
+    atk: 0,
+    def: 0,
+    effect: "If this card is Normal or Special Summoned: You can send 1 \"Gimmick Puppet\" monster with a different Level than this card from your Deck to the GY; this card's Level becomes that monster's. You can only use this effect of \"Gimmick Puppet Little Soldiers\" once per turn. ||You can banish this card from your GY, then target up to 2 \"Gimmick Puppet\" monsters you control; increase their Levels by 4 until the end of this turn.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/65f321124e67b487ab0883a7_w420.webp",
+    alt: "Gimmick Puppet Little Soldiers"
   },
-  "65f3214d4e67b487ab0887c0_w420": {
-    name: "Gimmick Puppet Cattle Scream",
-    type: "Spell Card",
-    effect: `Activate by targeting 1 "Gimmick Puppet" monster you control; Special Summon up to 2 "Gimmick Puppet" monsters from your hand whose total Levels are less than or equal to the targeted monster's Level, but their effects are negated, also you cannot Special Summon monsters, except "Gimmick Puppet" monsters, for the rest of this turn.
-||You can only activate 1 "Gimmick Puppet Cattle Scream" per turn.`
-  },
-  "65f3216e4e67b487ab08898c_w420": {
-    name: "Gimmick Puppet Fantasix Machinix",
-    type: "Machine / XYZ Monster",
+  {
+    name: "Gimmick Puppet Fiendish Knight",
+    category: "monster",
+    type: "Machine / Effect Monster",
     attribute: "DARK",
-    rank: "8",
-    atk: "3000",
-    def: "2000",
-    effect: `2 Level 8 "Gimmick Puppet" monsters
-||When your opponent activates a monster effect (Quick Effect): You can detach 1 material from this card; destroy that opponent's monster.
-||You can only use this effect of "Gimmick Puppet Fantasix Machinix" once per turn.`
+    level: 4,
+    atk: 1800,
+    def: 500,
+    effect: "If this card is in your hand: You can target 1 \"Gimmick Puppet\" monster in your GY or 1 monster in your opponent's GY; Special Summon it to its owner's field in Defense Position, but its effects are negated, then Special Summon this card. ||If this card is sent to the GY, except from the hand: You can add it to your hand. ||You can only use each effect of \"Gimmick Puppet Fiendish Knight\" once per turn, also you cannot Special Summon from the Extra Deck the turn you activate either of this card's effects, except \"Gimmick Puppet\" monsters.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/66443371d645925fa6f5c530_w420.webp",
+    alt: "Gimmick Puppet Fiendish Knight"
+  },
+  {
+    name: "Gimmick Puppet Terror Baby",
+    category: "monster",
+    type: "Machine / Effect Monster",
+    attribute: "DARK",
+    level: 4,
+    atk: 500,
+    def: 0,
+    effect: "When this card is Normal Summoned: You can target 1 \"Gimmick Puppet\" monster in your GY, except \"Gimmick Puppet Terror Baby\"; Special Summon it in Defense Position. ||You can banish this card from your GY; your opponent cannot activate cards or effects in response to the activation of your \"Gimmick Puppet\" monster effects this turn.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/60c2b3aba0e24f2d54a523d9_w420.webp",
+    alt: "Gimmick Puppet Terror Baby"
+  },
+  {
+    name: "Gimmick Puppet Rouge Doll",
+    category: "monster",
+    type: "Machine / Effect Monster",
+    attribute: "DARK",
+    level: 8,
+    atk: 400,
+    def: 1400,
+    effect: "If this card is in your hand: You can reveal 1 \"Gimmick Puppet\" Xyz Monster in your Extra Deck; Special Summon both this card, and 1 \"Gimmick Puppet\" monster with the same Level as the revealed monster's Rank from your Deck. ||If this card is sent to the GY, except from the hand: You can add this card to your hand. ||You can only use each effect of \"Gimmick Puppet Rouge Doll\" once per turn. You cannot Special Summon from the Extra Deck the turn you activate either of this card's effects, except \"Gimmick Puppet\" monsters.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/65f3212e4e67b487ab0885b3_w420.webp",
+    alt: "Gimmick Puppet Rouge Doll"
+  },
+  {
+    name: "Gimmick Puppet Cattle Scream",
+    category: "monster",
+    type: "Machine / Effect Monster",
+    attribute: "DARK",
+    level: 8,
+    atk: 2000,
+    def: 2000,
+    effect: "You can detach 1 material from an Xyz Monster you control; Special Summon this card from your hand or GY, but banish it when it leaves the field. You can only use this effect of \"Gimmick Puppet Cattle Scream\" once per turn. ||A \"Gimmick Puppet\" Xyz Monster that has this card as material gains this effect.\n\n● Once per turn: You can target 1 monster in your opponent's GY; Special Summon it to your opponent's field in Defense Position.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/65f3214d4e67b487ab0887c0_w420.webp",
+    alt: "Gimmick Puppet Cattle Scream"
+  },
+  {
+    name: "Gimmick Puppet Fantasix Machinix",
+    category: "extra",
+    type: "Machine / Xyz / Effect Monster",
+    attribute: "DARK",
+    rank: 8,
+    atk: 1500,
+    def: 3100,
+    effect: "2 Level 8 monsters. You can detach 1 material from this card; add 1 \"Rank-Up-Magic\" Spell from your Deck to your hand, also, you can Normal Summon 1 Machine monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.) ||If you Special Summon a \"Gimmick Puppet\" Xyz Monster(s) (except during the Damage Step): You can Special Summon this card from your GY to either field in Defense Position, then you can add 1 \"Rank-Up-Magic\" Spell from your GY to your hand. ||You can only use each effect of \"Gimmick Puppet Fantasix Machinix\" once per turn.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/65f3216e4e67b487ab08898c_w420.webp",
+    alt: "Gimmick Puppet Fantasix Machinix"
+  },
+  {
+    name: "Condolence Puppet",
+    category: "spell",
+    type: "Spell Card",
+    attribute: "N/A",
+    level: "N/A",
+    atk: "N/A",
+    def: "N/A",
+    effect: "Send \"Gimmick Puppet\" monsters with different names from your Deck to the GY, up to the number of monsters your opponent controls that were Special Summoned from the Extra Deck +1. ||You can banish this card from your GY, then target 1 Machine Xyz Monster you control; it cannot be destroyed by your opponent's card effects while face-up on the field. ||You can only use each effect of \"Condolence Puppet\" once per turn.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/60c2b3aaa0e24f2d54a519e3_w420.webp",
+    alt: "Condolence Puppet"
+  },
+  {
+    name: "Service Puppet Play",
+    category: "trap",
+    type: "Trap Card",
+    attribute: "N/A",
+    level: "N/A",
+    atk: "N/A",
+    def: "N/A",
+    effect: "Target monsters your opponent controls, up to the number of \"Gimmick Puppet\" Xyz Monsters you control; take control of those monsters until the End Phase. ||If this card is in your GY, except the turn it was sent there, and you control a \"Gimmick Puppet\" Xyz Monster: You can banish this card, then target 1 Xyz Monster in either GY; Special Summon it to either field in Defense Position. ||You can only use each effect of \"Service Puppet Play\" once per turn.",
+    imgSrc: "https://s3.duellinksmeta.com/cards/65f321b64e67b487ab088de1_w420.webp",
+    alt: "Service Puppet Play"
   }
   // Add more cards here!
-};
+];
 
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('cardModal');
