@@ -138,8 +138,6 @@ document.querySelectorAll('.images img').forEach(img => {
     modalImg.alt = card.name;
 
     // (keep the rest of your code unchanged)
-  });
-});
 
     const effectText = card.effect || '';
     const splitEffects = effectText.split('||').map(e => e.trim());
