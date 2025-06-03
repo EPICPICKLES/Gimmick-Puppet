@@ -11,18 +11,24 @@ const cardData = {
     effect: `If this card is Normal or Special Summoned: You can send 1 "Gimmick Puppet" monster with a different Level than this card from your Deck to the GY; this card's Level becomes that monster's. You can only use this effect of "Gimmick Puppet Little Soldiers" once per turn.
 ||You can banish this card from your GY, then target up to 2 "Gimmick Puppet" monsters you control; increase their Levels by 4 until the end of this turn.`
   },
-  "66443371d645925fa6f5c530_w420": {
-    name: "Gimmick Puppet Fiendish Knight",
-    type: "Machine / Effect Monster",
-    attribute: "DARK",
-    level: "4",
-    atk: "1800",
-    def: "500",
-    effect: `If this card is in your hand: You can target 1 "Gimmick Puppet" monster in your GY or 1 monster in your opponent's GY; Special Summon it to its owner's field in Defense Position, but its effects are negated, then Special Summon this card.
-||If this card is sent to the GY, except from the hand: You can add it to your hand.
-||You can only use each effect of "Gimmick Puppet Fiendish Knight" once per turn, also you cannot Special Summon from the Extra Deck the turn you activate either of this card's effects, except "Gimmick Puppet" monsters.`
+  "65f3214d4e67b487ab0887c0_w420": {
+    name: "Gimmick Puppet Cattle Scream",
+    type: "Spell Card",
+    effect: `Activate by targeting 1 "Gimmick Puppet" monster you control; Special Summon up to 2 "Gimmick Puppet" monsters from your hand whose total Levels are less than or equal to the targeted monster's Level, but their effects are negated, also you cannot Special Summon monsters, except "Gimmick Puppet" monsters, for the rest of this turn.
+||You can only activate 1 "Gimmick Puppet Cattle Scream" per turn.`
   },
-  // Add all other cards here with the same structure, using their unique data keys as the object keys
+  "65f3216e4e67b487ab08898c_w420": {
+    name: "Gimmick Puppet Fantasix Machinix",
+    type: "Machine / XYZ Monster",
+    attribute: "DARK",
+    rank: "8",
+    atk: "3000",
+    def: "2000",
+    effect: `2 Level 8 "Gimmick Puppet" monsters
+||When your opponent activates a monster effect (Quick Effect): You can detach 1 material from this card; destroy that opponent's monster.
+||You can only use this effect of "Gimmick Puppet Fantasix Machinix" once per turn.`
+  }
+  // Add more cards here!
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Open modal and populate data on card click
-  document.querySelectorAll('.gallery img').forEach(img => {
+  document.querySelectorAll('.images img').forEach(img => {
     img.addEventListener('click', () => {
       const key = img.dataset.key;
       const card = cardData[key];
@@ -68,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let summoningCondition = '';
       let effectsList = [];
 
-      if (card.type.toLowerCase().includes('extra')) {
-        // For Extra Deck cards: try to extract summoning condition before first period
+      if (card.type.toLowerCase().includes('xyz') || card.type.toLowerCase().includes('fusion') || card.type.toLowerCase().includes('synchro') || card.type.toLowerCase().includes('link')) {
+        // For Extra Deck cards, extract summoning condition from first effect
         const firstPart = splitEffects[0] || '';
         const firstPeriodIndex = firstPart.indexOf('.');
         if (firstPeriodIndex !== -1) {
@@ -84,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         effectsList = splitEffects;
       }
 
-      // Format effects with numbering and bullets
+      // Format effects
       const formattedEffects = effectsList
         .filter(e => e.length > 0)
         .map((effect, i) => {
@@ -106,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       modalDetails.innerHTML = detailsHTML;
-
       modalImg.classList.remove('zoomed');
     });
   });
@@ -114,26 +119,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // Image zoom toggle on modal image click
   modalImg.addEventListener('click', () => {
     modalImg.classList.toggle('zoomed');
-  });
-
-  // Tabs filtering functionality
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const cards = document.querySelectorAll('.gallery img');
-
-  tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      const selectedTab = button.dataset.tab;
-
-      cards.forEach(card => {
-        if (selectedTab === 'all') {
-          card.style.display = 'block';
-        } else {
-          card.style.display = (card.dataset.category === selectedTab) ? 'block' : 'none';
-        }
-      });
-    });
   });
 });
